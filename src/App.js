@@ -1,11 +1,12 @@
 import Header from "./components/Header.js"
+import Main from "./components/Main.js"
 
 export default function App() {
   return (
-    <div>
+    <>
       <Header />
-      <h1>Hello world</h1>
-    </div>
+      <Main />
+    </>
   );
 }
 
