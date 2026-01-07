@@ -11,10 +11,7 @@ export default function Main(){
         console.log("button clicked");
     }
 
-    function handleSubmit(event){
-        event.preventDefault()
-        const formData = new FormData(event.currentTarget)
-        console.log("Form data before: " , formData)
+    function submitRecipe(formData){
         const newIngredient = formData.get("ingredient")
         console.log("Form data after:", newIngredient)
         if(newIngredient && newIngredient !== ""){
@@ -24,7 +21,7 @@ export default function Main(){
     }
     return(
         <main>
-            <form onSubmit={handleSubmit} className="add-ingredient-form">
+            <form action={submitRecipe} className="add-ingredient-form">
                 <input
                     name="ingredient"
                     type="text"
