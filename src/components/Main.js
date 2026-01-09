@@ -4,7 +4,7 @@ import IngredientsList from "./IngredientsList.js"
 
 export default function Main(){
     const [ingredients, setIngredients] = useState([])
-    const [recipeShown, setRecipeShown] = useState(true)
+    const [recipeShown, setRecipeShown] = useState(false)
     const ingredientsList = ingredients.map((ingredient, index)=>{
         return (
             <li key={index}>{ingredient}</li>
@@ -41,7 +41,7 @@ export default function Main(){
                 
             </form>
                 {ingredientsList.length > 0 && <IngredientsList ingredientsList = {ingredientsList} handleRecipe={handleRecipe} />}
-                {!recipeShown && <ClaudeRecipe/>}
+                {recipeShown && <ClaudeRecipe/>}
         </main>
     )
 }
