@@ -4,10 +4,10 @@ import IngredientsList from "./IngredientsList.js"
 
 export default function Main(){
     const [ingredients, setIngredients] = useState([])
-    const [recipeShown, setRecipeShown] = useState(false)
-    const ingredientsList = ingredients.map((ingredient)=>{
+    const [recipeShown, setRecipeShown] = useState(true)
+    const ingredientsList = ingredients.map((ingredient, index)=>{
         return (
-            <li key={ingredient}>{ingredient}</li>
+            <li key={index}>{ingredient}</li>
         )
     })
 
