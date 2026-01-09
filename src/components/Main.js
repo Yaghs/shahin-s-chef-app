@@ -6,6 +6,7 @@ import {getRecipeFromChefClaude} from "./../ai"
 export default function Main(){
     const [ingredients, setIngredients] = useState([])
     const [recipeShown, setRecipeShown] = useState("")
+    const [disableForm, setDisableForm] = useState(false);
 
     const ingredientsList = ingredients.map((ingredient, index)=>{
         return (
@@ -17,9 +18,14 @@ export default function Main(){
         console.log("button clicked");
     }
 
+    //
     async function handleRecipe(){
+        //TODO:disable the input form and the buttons
+        setDisableForm(true)
         const generatedRecipe = await getRecipeFromChefClaude(ingredients)
         setRecipeShown(generatedRecipe)  
+        //TODO: enable the input form and the buttons 
+        setDisableForm(false)
         
     }
 
@@ -36,17 +42,19 @@ export default function Main(){
     return(
         <main>
             <form action={submitRecipe} className="add-ingredient-form">
+
                 <input
                     name="ingredient"
                     type="text"
                     placeholder = "e.g oregano"
                     aria-label="Add ingredient"
+                    disabled={disableForm}
                 />
-                <button onClick={handleClick}>Add ingredient</button>
+                <button onClick={handleClick} disabled={disableForm}>Add ingredient</button>
                 
             </form>
-                {ingredientsList.length > 0 && <IngredientsList ingredientsList = {ingredientsList} handleRecipe={handleRecipe} />}
-                {recipeShown && <ClaudeRecipe recipe={recipeShown}/>}
+                {ingredientsList.length > 0 && <IngredientsList ingredientsList = {ingredientsList} handleRecipe={handleRecipe} isDisabled={disableForm} />}
+                {recipeShown && <ClaudeRecipe recipe={recipeShown} />}
         </main>
     )
 }

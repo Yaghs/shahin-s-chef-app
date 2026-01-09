@@ -1,4 +1,5 @@
 export default function IngredientsList(prop){
+    console.log(prop.isDisabled)
     return(
         <section>
                     <h2>Ingredients on hand:</h2>
@@ -10,7 +11,7 @@ export default function IngredientsList(prop){
                                 <h3>Ready for a recipe?</h3>
                                 <p>Generate a recipe from your list of ingredients</p>
                             </div>
-                            <button onClick={prop.handleRecipe}>Get a recipe</button>
+                            <button style={!prop.isDisabled ? {} : { backgroundColor: "#573125"}} onClick={prop.handleRecipe} disabled={prop.isDisabled}>Get a recipe</button>
                         </div>
                     }
                     </section>
