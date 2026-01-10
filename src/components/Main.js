@@ -1,4 +1,4 @@
-import {useState} from "react"
+import {useState, useRef, useEffect} from "react"
 import ClaudeRecipe from "./ClaudeRecipe.js"
 import IngredientsList from "./IngredientsList.js"
 import {getRecipeFromChefClaude} from "./../ai"
@@ -7,6 +7,14 @@ export default function Main(){
     const [ingredients, setIngredients] = useState([])
     const [recipeShown, setRecipeShown] = useState("")
     const [disableForm, setDisableForm] = useState(false);
+    const recipeSection = useRef(null)
+    console.log(recipeSection)
+
+    useEffect(()=> {
+        if(recipeShown !== "" && recipeSection.current !== null){
+            recipeSection.current.scrollIntoView({behavior: "smooth"})
+        }
+    },[recipeShown])
 
     const ingredientsList = ingredients.map((ingredient, index)=>{
         return (
@@ -26,6 +34,7 @@ export default function Main(){
         setRecipeShown(generatedRecipe)  
         //TODO: enable the input form and the buttons 
         setDisableForm(false)
+
         
     }
 
@@ -53,7 +62,7 @@ export default function Main(){
                 <button onClick={handleClick} disabled={disableForm}>Add ingredient</button>
                 
             </form>
-                {ingredientsList.length > 0 && <IngredientsList ingredientsList = {ingredientsList} handleRecipe={handleRecipe} isDisabled={disableForm} />}
+                {ingredientsList.length > 0 && <IngredientsList ingredientsList = {ingredientsList} handleRecipe={handleRecipe} isDisabled={disableForm} ref={recipeSection } />}
                 {recipeShown && <ClaudeRecipe recipe={recipeShown} />}
         </main>
     )
